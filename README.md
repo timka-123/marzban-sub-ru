@@ -1,6 +1,7 @@
 <p align="center">
   <a href="https://github.com/x0sina/marzban-sub" target="_blank" rel="noopener noreferrer">
-    [image](https://github.com/DigneZzZ/marzban-sub-ru/assets/50312583/74fe9e26-8f5b-444d-9958-b825d27d470f)
+    <img src="[https://raw.githubusercontent.com/x0sina/marzban-sub/main/PreviewTemplate.png](https://github.com/DigneZzZ/marzban-sub-ru/assets/50312583/74fe9e26-8f5b-444d-9958-b825d27d470f)" title="Marzba-Sub"/>
+  
 
   </a>
 </p>
