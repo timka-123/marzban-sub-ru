@@ -18,13 +18,13 @@ A simple html template to better display user information
 # Attributes
 - Quickly add subscription links to programs
 - The link to download the required applications
-- Three languages (Russian, English, Persian)
+- Three languages (Russian)
 - Sub fantasy page with beautiful color and glaze
 - Receive the configs with the copy icon at the bottom of the page
 # Installation Steps
 1. Download File Template
 ```sh
-sudo wget -N -P /var/lib/marzban/templates/subscription/  https://raw.githubusercontent.com/x0sina/marzban-sub/main/index.html
+sudo wget -N -P /var/lib/marzban/templates/subscription/  https://raw.githubusercontent.com/dignezzz/marzban-sub-ru/main/index.html
 ```
 
 2. Enter the following commands in your server's terminal:
@@ -65,11 +65,6 @@ Search for the user's logo:
 ```
 images/marzban.svg
 ```
-Search for the background image:
-```
-background: url('https://4kwallpapers.com
-```
-After making changes, save the file and restart Marzban.
 
 ## Host Version
 To use the host version, upload the sub folder to the host and change the value of BASE_URL to your panel address in the index.php file just like the following example. Remember to write http if you don't have an SSL for your panel domain.
