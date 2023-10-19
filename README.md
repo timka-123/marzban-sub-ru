@@ -1,6 +1,7 @@
 <p align="center">
   <a href="https://github.com/x0sina/marzban-sub" target="_blank" rel="noopener noreferrer">
-    <img src="https://raw.githubusercontent.com/x0sina/marzban-sub/main/PreviewTemplate.png" title="Marzba-Sub"/>
+    ![image](https://github.com/DigneZzZ/marzban-sub-ru/assets/50312583/74fe9e26-8f5b-444d-9958-b825d27d470f)
+
   </a>
 </p>
 <h1 align="center"/> <a href="https://github.com/Gozargah/Marzban">Страница подписки для Marzban</a></h1>
