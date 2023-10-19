@@ -5,7 +5,7 @@
 
   </a>
 </p>
-<h1 align="center"/> <a href="https://github.com/Gozargah/Marzban" width="500px">Страница подписки для Marzban</a></h1>
+<h1 align="center"/> <a href="https://github.com/Gozargah/Marzban" height="500px">Страница подписки для Marzban</a></h1>
 
 # Table of Contents
 - [Attributes](#Attributes)
