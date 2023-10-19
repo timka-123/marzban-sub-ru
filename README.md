@@ -51,8 +51,6 @@ To update the template, just repeat step 1.
 # Default Language
 Default Language only RUSSIAN
 
-In this example, the main language is English.
-
 # Personalization
 To personalize the Telegram ID, background image and user logo, changes must be included in the html file, which is possible by searching for some values.
 To search using nano, first open the file with nano with the following command:
