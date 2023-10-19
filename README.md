@@ -1,11 +1,11 @@
 <p align="center">
   <a href="https://github.com/x0sina/marzban-sub" target="_blank" rel="noopener noreferrer">
-    <img src="https://github.com/DigneZzZ/marzban-sub-ru/blob/main/Preview_page.jpeg" title="Marzba-Sub"/>
+    <img src="https://github.com/DigneZzZ/marzban-sub-ru/blob/main/Preview_page.jpeg" height="500px title="Marzba-Sub"/>
   
 
   </a>
 </p>
-<h1 align="center"/> <a href="https://github.com/Gozargah/Marzban" height="2000px">Страница подписки для Marzban</a></h1>
+<h1 align="center"/> <a href="https://github.com/Gozargah/Marzban">Страница подписки для Marzban</a></h1>
 
 # Table of Contents
 - [Attributes](#Attributes)
