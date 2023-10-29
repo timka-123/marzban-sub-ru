@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/x0sina/marzban-sub" target="_blank" rel="noopener noreferrer"> original rep </a>
+  <a href="https://github.com/x0sina/marzban-sub" target="_blank" rel="noopener noreferrer"> original rep </a> <br />
     <img src="https://github.com/DigneZzZ/marzban-sub-ru/blob/main/preview_page_ru.jpeg" height="800px title="Marzba-Sub"/>
   
 
