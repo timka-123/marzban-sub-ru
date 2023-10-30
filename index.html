@@ -3664,7 +3664,7 @@ function detectOS() {
                 addConfigs: "Добавьте конфиги",
                 AddtoApp: "Добавить в приложение",
                 myConfigs: "Мои конфиги",
-                copyAllCfgs: "Скопировать все конфиги",
+                copyAllCfgs: "Скопировать подписку",
                 copied: "Скопировано",
                 clickOutClose: "Нажмите за пределами окна, чтобы закрыть.",
                 chooseApp: "Выберите нужную вам программу",
@@ -3768,7 +3768,7 @@ function detectOS() {
             copyButton.addEventListener("click", function () {
                 console.log('clicked');
                 // Text to copy
-                const subLinks = "{{ user.links }}"
+                const subLinks = "{{ user.subscription_url }}"
 
                 const cleanedString = subLinks.replace(/[\[\]']/g, '');
 
