@@ -3332,23 +3332,24 @@ Constrain images and videos to the parent width and preserve their intrinsic asp
             }
         }
 
-        function detectOS() {
-            const userAgent = navigator.userAgent.toLowerCase();
+function detectOS() {
+  const userAgent = navigator.userAgent.toLowerCase();
 
-            if (userAgent.includes('win')) {
-                return 'Windows';
-            } else if (userAgent.includes('mac')) {
-                return 'MacOS';
-            } else if (userAgent.includes('android')) {
-                return 'Android';
-            } else if (userAgent.includes('linux')) {
-                return 'Linux';
-            } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
-                return 'iOS';
-            } else {
-                return 'Unknown';
-            }
-        }
+  if (userAgent.includes('win')) {
+    return 'Windows';
+  } else if (userAgent.includes('mac') && !userAgent.includes('iphone') && !userAgent.includes('ipad')) {
+    return 'macOS';
+  } else if (userAgent.includes('android')) {
+    return 'Android';
+  } else if (userAgent.includes('linux')) {
+    return 'Linux';
+  } else if (userAgent.includes('iphone') || userAgent.includes('ipad')) {
+    return 'iOS';
+  } else {
+    return 'Unknown';
+  }
+}
+
 
         window
             .matchMedia("(prefers-color-scheme: dark)")
