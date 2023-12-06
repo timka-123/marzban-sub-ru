@@ -2,8 +2,11 @@
   <a href="https://github.com/x0sina/marzban-sub" target="_blank" rel="noopener noreferrer"> original rep </a> <br />
     <img src="https://github.com/DigneZzZ/marzban-sub-ru/blob/main/image.png" height="800px title="Marzba-Sub"/>
   
-
-
+</p>
+<p>
+  Мой форум: https://openode.ru
+  <br />На форуме действуют подписки для доступа к Клубам (в т.ч. по Marzban): https://openode.ru/subscriptions/
+  <br />В клубе собраны циклы статей по полноценной установке этой и других панелей, обеспечения удобства и безопасного доступа. А также эксклюзивный дизайн подписки.
 </p>
 <h1 align="center"/> <a href="https://github.com/Gozargah/Marzban">Страница подписки для Marzban</a></h1>
 
