@@ -68,7 +68,12 @@
 				    </li>
 				    <li class="list-group-item d-flex justify-content-between align-items-center">
                     Трафик<span id="used">0 GB / 100 GB</span>
-                    <script>document.getElementById("used").innerHTML = `${tmpUsage} GB / ${dataLimit} GB`</script>
+                    <script>
+                        if (dataLimit == "∞") {
+                            document.getElementById("used").innerHTML = `∞ GB`
+                        } else {
+                            document.getElementById("used").innerHTML = `${dataUsed} GB / ${dataLimit} GB`
+                        }                    </script>
 				    </li>
 				    <li class="list-group-item d-flex justify-content-between align-items-center" x-init="Alpine.data( 'expireDate', expireDate = expireDateVar )">
 				    	Истекает<span id="expire">09.08.2024 20:59:59</span><script>document.getElementById('expire').innerHTML = expireDateVar</script>
@@ -555,8 +560,6 @@
 		Array.from(links).forEach(link => {
 			link.href = link.href.replace('{link}', window.location.href);
 		});
-
-        docunent.getElementById("used").innerHTML = `Трафик<span>${tmpUsage} GB / ${dataLimit} GB</span>`
 
 	</script>
 </main></body></html>
