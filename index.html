@@ -154,7 +154,7 @@
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
 									    </div>
 									</a>
-									<a id="linkFix" href="streisand://import/https://md.zelpen.org/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQZW5ndWluVlBOX1Jlc2N1ZV9rZXkiLCJhY2Nlc3MiOiJzdWJzY3JpcHRpb24iLCJpYXQiOjE3MjI4NjM2OTJ9.T6uR6e6Yk_3qSwPzbia59ij9CF5EsiLTOJLpSVV2ZFw#Title" target="_blank" class="link list-group-item list-group-item-action">
+									<a id="linkFix" href="streisand://import/" target="_blank" class="link list-group-item list-group-item-action">
 										<span>Добавить подписку</span>
 									  	<div class="link-icon">
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
@@ -204,13 +204,18 @@
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
 									    </div>
 									</a>
-									<a href="hiddify://install-sub/?url=https://md.zelpen.org/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQZW5ndWluVlBOX1Jlc2N1ZV9rZXkiLCJhY2Nlc3MiOiJzdWJzY3JpcHRpb24iLCJpYXQiOjE3MjI4NjM2OTJ9.T6uR6e6Yk_3qSwPzbia59ij9CF5EsiLTOJLpSVV2ZFw#Title" target="_blank" class="self-link link list-group-item list-group-item-action">
+									<a href="" id="hdflink" target="_blank" class="self-link link list-group-item list-group-item-action">
 										<span>Добавить подписку</span>
 									  	<div class="link-icon">
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
 									    </div>
 									</a>
 								</div>
+
+                                <script>
+										var a = document.getElementById('hdflink');
+										a.href = "hiddify://install-sub/?url=" + window.location.href + "#Title";
+								</script>
 								
 							    <div class="instructions">
 							    	<h6 class="instructions-title">Инструкция по подключению</h6>
@@ -238,12 +243,16 @@
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
 									    </div>
 									</a>
-									<a href="v2box://install-sub?url=${fullUrl}&amp;name=sub" target="_blank" class="self-link link list-group-item list-group-item-action">
+									<a id="v2bi" href="v2box://install-sub?url=${fullUrl}&amp;name=sub" target="_blank" class="self-link link list-group-item list-group-item-action">
 										<span>Добавить подписку</span>
 									  	<div class="link-icon">
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
 									    </div>
 									</a>
+                                    <script>
+                                        var a = document.getElementById("v2bi")
+                                        a.href = "v2box://install-sub?url=" + window.location.href + "#Title"    
+                                    </script>
 									<a href="v2box://routes?multi=W3sidHlwZSI6IkRvbWFpbiIsIm1hdGNoTW9kZSI6ImtleXdvcmQiLCJ0YWciOiJkaXJlY3QiLCJuYW1lIjoicm91dGUuRDM4OEU3MjMtOTJENS00QkJDLUFFNEItMzkyQkM0NTI3ODMyIiwibGlzdCI6WyJyZWdleHA6LipcXC5ydSQiXSwicmVtYXJrIjoiUlUtRGlyZWN0IiwiaXNFbmFibGUiOnRydWUsImxpc3RJUCI6WyJnZW9pcDpydSJdfSx7InJlbWFyayI6Ik1lc3NhZ2Vycy1kaXJlY3QiLCJ0YWciOiJkaXJlY3QiLCJpc0VuYWJsZSI6dHJ1ZSwibmFtZSI6InJvdXRlLkE2MDkwODQyLTVDMzYtNDJFMi1BMkI5LTdERjlEODA2ODM4NiIsImxpc3RJUCI6W10sIm1hdGNoTW9kZSI6ImtleXdvcmQiLCJ0eXBlIjoiRG9tYWluIiwibGlzdCI6WyJnZW9zaXRlOnRlbGVncmFtIiwiZ2Vvc2l0ZTp3aGF0c2FwcCIsImdlb3NpdGU6YXBwbGUiLCJnZW9zaXRlOml0dW5lcyIsImdlb3NpdGU6Z29vZ2xlIiwiZ2Vvc2l0ZTp5YW5kZXgiXX1d" target="_blank" class="self-link link list-group-item list-group-item-action">
 										<span>Добавить роутинг</span>
 										<div class="link-icon">
@@ -277,12 +286,17 @@
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" /></svg>
 									    </div>
 									</a>
-									<a href="hiddify://install-sub/?url={link}#Title" target="_blank" class="self-link link list-group-item list-group-item-action">
+									<a id="hdflink_lin" href="hiddify://install-sub/?url={link}#Title" target="_blank" class="self-link link list-group-item list-group-item-action">
 										<span>Добавить подписку</span>
 									  	<div class="link-icon">
 									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" /></svg>
 									    </div>
 									</a>
+
+                                    <script>
+                                        var a = document.getElementById("hdflink_lin")
+                                        a.href = "hiddify://install-sub/?url=" + window.location.href + "#Title"    
+                                    </script>
 								</div>
 								
 							    <div class="instructions">
