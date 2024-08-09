@@ -44,7 +44,7 @@
         const dataUsage = dataLimit == "∞" ? 100 : tmpUsage;
         const dataChartColor = dataUsage < 40 ? "bg-green-500" : dataUsage < 80 ? "bg-yellow-600" : "bg-red-500";
         const resetInterval = "{{ user.data_limit_reset_strategy.value }}";
-        let expireDateVar = expireDateInit.includes("∞") ? "∞" : localStorage.getItem("lang") == "fa" ? new Date(expireDateInit).toLocaleString("fa-IR-u-nu-latn").replace(",", " ") : expireDateInit;
+        let expireDateVar = expireDateInit.includes("∞") ? "∞" : new Date(expireDateInit).toLocaleString("en-GB");
 
     </script>
 
