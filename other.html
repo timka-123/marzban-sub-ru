@@ -1,0 +1,561 @@
+<html lang="ru" data-bs-theme="dark"><head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Основная информация о подписке и способах подключения">
+	<link rel="icon" type="image/x-icon" href="https://google.com/pic.png">
+	<title></title>
+
+	<!-- Set the theme at the very beginning, so as not to scare a user with a white screen while loading the page on slow devices -->
+	<script type="text/javascript">
+
+		function calculateSettingAsThemeString({ localStorageTheme, systemSettingDark }) {
+			if (localStorageTheme !== null) {
+		    	return localStorageTheme
+		  	}
+		   if (systemSettingDark.matches) {
+		    	return "dark"
+		   }
+		   return "light"
+		}
+
+		function setTheme(newTheme) {
+			document.documentElement.setAttribute('data-bs-theme', newTheme)
+			localStorage.setItem("theme", newTheme);
+			currentThemeSetting = newTheme;
+		}
+		
+		const localStorageTheme = localStorage.getItem("theme");
+		const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
+		let currentThemeSetting = calculateSettingAsThemeString({ localStorageTheme, systemSettingDark });
+
+		setTheme(currentThemeSetting)
+
+	</script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+	<script>
+        const expireDateInit = "{% if not user.expire %}∞{% else %}{% set current_timestamp = now().timestamp() %}{{ user.expire | datetime }}{% endif %}";
+        const dataLimit = "{% if not user.data_limit %}∞{% else %}{{ user.data_limit }}{% endif %}";
+        const dataUsed = "{{ user.used_traffic }}";
+        var tmpUsage = ((parseFloat(dataUsed) / parseFloat(dataLimit)) * 100).toFixed(2);
+        if (tmpUsage > 100) tmpUsage = 100;
+        const dataUsage = dataLimit == "∞" ? 100 : tmpUsage;
+        const dataChartColor = dataUsage < 40 ? "bg-green-500" : dataUsage < 80 ? "bg-yellow-600" : "bg-red-500";
+        const resetInterval = "{{ user.data_limit_reset_strategy.value }}";
+        let expireDateVar = expireDateInit.includes("∞") ? "∞" : localStorage.getItem("lang") == "fa" ? new Date(expireDateInit).toLocaleString("fa-IR-u-nu-latn").replace(",", " ") : expireDateInit;
+
+    </script>
+
+</head>
+<body>
+
+	<!-- <header>
+		<h1><img id="logo" src="/www/logo.png">Logo</h1>
+	</header> -->
+
+	<main>
+		<div class="modules">
+			<div class="module subscription">
+				<h2 class="module-title">SecureWay VPN</h2>
+				<ul class="list-group list-group-flush">
+				    <li class="list-group-item d-flex justify-content-between align-items-center">
+				    	Имя пользователя<span>{{ user.username }}</span>
+				    </li>
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						Статус подписки<span><div class="dot dot-green"></div>Активна</span>	
+				    </li>
+				    <li class="list-group-item d-flex justify-content-between align-items-center" id="used">
+                        Трафик<span>${dataUsed} GB / ${dataLimit} GB</span>
+				    </li>
+				    <li class="list-group-item d-flex justify-content-between align-items-center" x-init="Alpine.data( 'expireDate', expireDate = expireDateVar )">
+				    	Истекает<span id="expire">09.08.2024 20:59:59</span><script>document.getElementById('expire').innerHTML = expireDateVar</script>
+				    </li>
+				    <li class="list-group-item d-flex justify-content-between align-items-center">
+						<a href="https://t.me/SecureWayVPN_Bot" target="_blank" class="link-dark" rel="noopener noreferrer">Продление подписки, поддержка</a>
+							<a href="https://t.me/SecureWayVPN_Bot" target="_blank" class="link-dark" rel="noopener noreferrer">
+							<span>
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewport="" width="24px" height="24px" viewBox="0 0 50 50">
+                        	<path d="M25,2c12.703,0,23,10.297,23,23S37.703,48,25,48S2,37.703,2,25S12.297,2,25,2z M32.934,34.375	c0.423-1.298,2.405-14.234,2.65-16.783c0.074-0.772-0.17-1.285-0.648-1.514c-0.578-0.278-1.434-0.139-2.427,0.219	c-1.362,0.491-18.774,7.884-19.78,8.312c-0.954,0.405-1.856,0.847-1.856,1.487c0,0.45,0.267,0.703,1.003,0.966	c0.766,0.273,2.695,0.858,3.834,1.172c1.097,0.303,2.346,0.04,3.046-0.395c0.742-0.461,9.305-6.191,9.92-6.693	c0.614-0.502,1.104,0.141,0.602,0.644c-0.502,0.502-6.38,6.207-7.155,6.997c-0.941,0.959-0.273,1.953,0.358,2.351	c0.721,0.454,5.906,3.932,6.687,4.49c0.781,0.558,1.573,0.811,2.298,0.811C32.191,36.439,32.573,35.484,32.934,34.375z">
+                        	</path>
+	                        </svg></span></a>
+				    </li>
+				    <!-- li style="height: 45px;" class="list-group-item d-flex align-items-center">
+						<button style="padding: 0;" type="button" class="btn btn-link link-dark" onclick="copyToClipboard(['vless://d82e8c9f-c71b-4c59-bec7-4ff4d172f993@176.123.1.241:443?security=reality&type=tcp&headerType=&flow=xtls-rprx-vision&path=&host=&sni=hipstrumentals.com&fp=chrome&pbk=SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc&sid=&spx=#%F0%9F%90%A7%F0%9F%87%B2%F0%9F%87%A9%20MD%7CZP%20Username%3A%20PenguinVPN_Rescue_key']); showNotification('toast');">Скопировать подписку</button>
+						<div id="toast">Подписка скопирована</div>
+				    </li -->		
+				</ul>
+			</div>
+
+			<div class="module">
+				<h3 class="module-title">Подключение</h3>
+				<div class="accordion accordion-flush" id="accordionApps">
+				  	<div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-apps-android">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-apps-android" aria-expanded="false" aria-controls="flush-collapse-apps-android">Android</button>
+					    </h2>
+					    <div id="flush-collapse-apps-android" class="accordion-collapse collapse" aria-labelledby="flush-heading-apps-android" data-bs-parent="#accordionApps" style="">
+					    	<div class="accordion-body">
+							    <h3>v2rayNG</h3>
+							    v2rayNG - рекомендуемое приложение для Android
+
+							    <div class="list-group list-group-flush">
+									<a href="https://play.google.com/store/apps/details?id=com.v2ray.ang" class="link list-group-item list-group-item-action" target="_blank">
+										<span>Скачать в Google Play</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+									<a href="v2rayng://install-config?url=https://md.zelpen.org/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQZW5ndWluVlBOX1Jlc2N1ZV9rZXkiLCJhY2Nlc3MiOiJzdWJzY3JpcHRpb24iLCJpYXQiOjE3MjI4NjM2OTJ9.T6uR6e6Yk_3qSwPzbia59ij9CF5EsiLTOJLpSVV2ZFw&amp;name=Title" target="_blank" class="self-link link list-group-item list-group-item-action">
+										<span>Добавить подписку</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+								</div>
+								
+							    <div class="instructions">
+							    	<h6 class="instructions-title">Инструкция по подключению</h6>
+								    <p>1. Нажмите "Скачать в Google Play", чтобы установить приложение.</p>
+								    <p>2. Вернитесь на эту страницу и нажмите "Добавить подписку".</p>
+								    <p>3. В приложении нажмите на три вертикальных точки и выберите "Обновить подписку".  
+									<img class="img-fluid rounded img-help" src="https://i.postimg.cc/V6Jqv0qF/photo-5294201900410983789-y.jpg"></p>
+									<!-- p><img class="img-fluid rounded img-help" src="https://i.postimg.cc/W1Vw83V2/update.jpg"></p -->
+								    <p>4. Готово, подключайтесь! Кнопка подключения в приложении в правом нижнем углу.</p>
+									<p></p><p><img class="img-fluid rounded img-help" src="https://i.postimg.cc/pybp2pCy/connect.jpg"></p>
+									
+							    </div>
+							</div>
+					    </div>
+					 </div>
+
+					 <div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-apps-ios">
+					    	<button class="accordion-button collapsed lh0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-apps-ios" aria-expanded="false" aria-controls="flush-collapse-apps-ios">IOS</button>
+					    </h2>
+					    <div id="flush-collapse-apps-ios" class="accordion-collapse collapse" aria-labelledby="flush-heading-apps-ios" data-bs-parent="#accordionApps">
+						     <div class="accordion-body">
+							    <h3>Streisand</h3>
+							    Streisand - рекомендуемое приложение для IOS 14+
+							    <div class="list-group list-group-flush">
+									<a href="https://apps.apple.com/us/app/streisand/id6450534064" target="_blank" class="link list-group-item list-group-item-action">
+										<span>Скачать в AppStore</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+									<a id="linkFix" href="streisand://import/https://md.zelpen.org/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQZW5ndWluVlBOX1Jlc2N1ZV9rZXkiLCJhY2Nlc3MiOiJzdWJzY3JpcHRpb24iLCJpYXQiOjE3MjI4NjM2OTJ9.T6uR6e6Yk_3qSwPzbia59ij9CF5EsiLTOJLpSVV2ZFw#Title" target="_blank" class="link list-group-item list-group-item-action">
+										<span>Добавить подписку</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+
+									<!-- For some reason js code doesn't work on Safari. The only quick fix I know -->
+									<script>
+										var a = document.getElementById('linkFix');
+										a.href = "streisand://import/" + window.location.href + "#Title";
+									</script>
+
+									<a href="streisand://aW1wb3J0L3JvdXRlOi8vWW5Cc2FYTjBNRERWQVFJREJBVUdIUjRmSUZWeWRXeGxjMTFrYjIxaGFXNU5ZWFJqYUdWeVZHNWhiV1ZlWkc5dFlXbHVVM1J5WVhSbFozbFVkWFZwWktJSEdOTUlDUW9MREExU2FYQmJiM1YwWW05MWJtUlVZV2RXWkc5dFlXbHVvRlprYVhKbFkzU3FEZzhRRVJJVEZCVVdGMTV5WldkbGVIQTZMaXBjTG5KMUpGOFFEMmRsYjNOcGRHVTZlVzkxZEhWaVpWOFFFR2RsYjNOcGRHVTZkR1ZzWldkeVlXMWRaMlZ2YzJsMFpUcGhjSEJzWlY1blpXOXphWFJsT21kdmIyZHNaVjVuWlc5emFYUmxPbmxoYm1SbGVGcG5aVzl6YVhSbE9uWnJYeEFYWjJWdmMybDBaVHBqWVhSbFoyOXllUzFuYjNZdGNuVmVaMlZ2YzJsMFpUcDBkMmwwWTJoZkVCQm5aVzl6YVhSbE9uZG9ZWFJ6WVhCdzBnZ1pHZ3hiYjNWMFltOTFibVJVWVdlaUd4eFlaMlZ2YVhBNmNuVmRaMlZ2YVhBNmNISnBkbUYwWlZab2VXSnlhV1JvQkNBRVBnUkRCRUlFT0FROUJETUFJRnBKVUU5dVJHVnRZVzVrWHhBa1FqUkNRemRHUWtNdE1FSTVPUzAwT1RNd0xVSXhSVU10TjBWRE1rVkdSRGRDTVRFM0FBZ0FFd0FaQUNjQUxBQTdBRUFBUXdCS0FFMEFXUUJnQUdFQWFBQnpBSUlBbEFDbkFMVUF4QURUQU40QStBRUhBUm9CSHdFckFTNEJOd0ZGQVV3QlhRRm9BQUFBQUFBQUFnRUFBQUFBQUFBQUlRQUFBQUFBQUFBQUFBQUFBQUFBQVk4PQ==" target="_blank" class="link list-group-item list-group-item-action">
+										<span>Добавить роутинг</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+								</div>
+								
+							    <div class="instructions">
+							    	<h6 class="instructions-title">Инструкция по подключению</h6>
+								    <p>1. Нажмите "Скачать в AppStore", чтобы установить приложение.</p>
+								    <p>2. Вернитесь на эту страницу и нажмите "Добавить подписку".</p>	
+								    <p>3. В приложени перейдите в "Настройки" → "Подписка" и поставьте чекбокс "Обновить при открытии".
+								    <img class="img-fluid rounded img-help" src="https://i.postimg.cc/02zbLbv3/IMG-7503.jpg"></p>
+								    <p>4. Вернитесь на эту страницу и нажмите "Добавить роутинг". 
+								    </p><p>5. В приложении нажмите "Роутинг", поставьте рядом с ним галочку. Затем нажмите сверху на чекбокс, чтобы применить правила роутинга. Готово, подключайтесь!
+									<img class="img-fluid rounded img-help" src="https://i.postimg.cc/PxqtYRrc/IMG-7504.jpg"></p>
+							    </div>
+							</div>
+					    </div>
+					</div>
+					<div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-apps-windows">
+					    	<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-apps-windows" aria-expanded="false" aria-controls="flush-collapse-apps-windows">Windows</button>
+					    </h2>
+					    <div id="flush-collapse-apps-windows" class="accordion-collapse collapse" aria-labelledby="flush-heading-apps-windows" data-bs-parent="#accordionApps">
+					    	<div class="accordion-body">
+							    <h3>Hiddify</h3>
+							    Hiddify - рекомендуемое приложение для Windows. Кроме Windows его также можно установить на Android и Linux.
+
+							    <div class="list-group list-group-flush">
+									<a href="ms-windows-store://pdp?hl=ru-ru&amp;gl=pl%2F&amp;productid=9pdfnl3qv2s5" target="_blank" class="link list-group-item list-group-item-action">
+										<span>Установить Hiddify</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+									<a href="hiddify://install-sub/?url=https://md.zelpen.org/user/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJQZW5ndWluVlBOX1Jlc2N1ZV9rZXkiLCJhY2Nlc3MiOiJzdWJzY3JpcHRpb24iLCJpYXQiOjE3MjI4NjM2OTJ9.T6uR6e6Yk_3qSwPzbia59ij9CF5EsiLTOJLpSVV2ZFw#Title" target="_blank" class="self-link link list-group-item list-group-item-action">
+										<span>Добавить подписку</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+								</div>
+								
+							    <div class="instructions">
+							    	<h6 class="instructions-title">Инструкция по подключению</h6>
+								    <p>1. <b>Установите Hiddify</b> из Microsoft Store, нажав ссылку выше.</p>
+								    <p>2. <b>Добавьте подписку</b> в Hiddify, нажав ссылку выше. (Если при добавлении произойдет ошибка, используйте альтернативный способ: ключ. Он есть внизу этой страницы.)</p>
+								    <p>3. <b>Добавьте роутинг.</b> В настройках Hiddify смените язык на Русский, и укажите регион Россия. Тогда через VPN будут открываться только зарубежные сайты. Российские сайты будут открываться напрямую. Так удобнее и безопаснее.</p>
+								    <p>4. <b>Готово,</b> подключайтесь!</p>
+							    </div>
+							</div>
+					    </div>
+					 </div>
+					 <div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-apps-macos">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-apps-macos" aria-expanded="false" aria-controls="flush-collapse-apps-macos">macOS</button>
+					    </h2>
+					    <div id="flush-collapse-apps-macos" class="accordion-collapse collapse" aria-labelledby="flush-heading-apps-macos" data-bs-parent="#accordionApps">
+					    	<div class="accordion-body">
+							    <h3>V2Box</h3>
+							    V2Box - рекомендуемое приложение для macOS. Кроме macOS его также можно установить на iOS.
+							    
+							    <div class="list-group list-group-flush">
+									<a href="https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690" target="_blank" class="link list-group-item list-group-item-action">
+										<span>Скачать из Mac App Store</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+									<a href="v2box://install-sub?url=${fullUrl}&amp;name=sub" target="_blank" class="self-link link list-group-item list-group-item-action">
+										<span>Добавить подписку</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+									    </div>
+									</a>
+									<a href="v2box://routes?multi=W3sidHlwZSI6IkRvbWFpbiIsIm1hdGNoTW9kZSI6ImtleXdvcmQiLCJ0YWciOiJkaXJlY3QiLCJuYW1lIjoicm91dGUuRDM4OEU3MjMtOTJENS00QkJDLUFFNEItMzkyQkM0NTI3ODMyIiwibGlzdCI6WyJyZWdleHA6LipcXC5ydSQiXSwicmVtYXJrIjoiUlUtRGlyZWN0IiwiaXNFbmFibGUiOnRydWUsImxpc3RJUCI6WyJnZW9pcDpydSJdfSx7InJlbWFyayI6Ik1lc3NhZ2Vycy1kaXJlY3QiLCJ0YWciOiJkaXJlY3QiLCJpc0VuYWJsZSI6dHJ1ZSwibmFtZSI6InJvdXRlLkE2MDkwODQyLTVDMzYtNDJFMi1BMkI5LTdERjlEODA2ODM4NiIsImxpc3RJUCI6W10sIm1hdGNoTW9kZSI6ImtleXdvcmQiLCJ0eXBlIjoiRG9tYWluIiwibGlzdCI6WyJnZW9zaXRlOnRlbGVncmFtIiwiZ2Vvc2l0ZTp3aGF0c2FwcCIsImdlb3NpdGU6YXBwbGUiLCJnZW9zaXRlOml0dW5lcyIsImdlb3NpdGU6Z29vZ2xlIiwiZ2Vvc2l0ZTp5YW5kZXgiXX1d" target="_blank" class="self-link link list-group-item list-group-item-action">
+										<span>Добавить роутинг</span>
+										<div class="link-icon">
+											<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z"></path></svg>
+										</div>
+									</a>
+								</div>
+							    <div class="instructions">
+							    	<h6 class="instructions-title">Инструкция по подключению</h6>
+								    <p>1. Нажмите "Скачать из Mac App Store", чтобы установить приложение.</p>
+								    <p>2. Вернитесь на эту страницу и нажмите "Добавить подписку".</p>
+									<p>3. В приложении на вкладке Configs выберите добавленную подписку, нажав на неё.</p>
+								    <p>4. Готово, подключайтесь! Для этого на вкладке Home кликните Tap To Connect.</p>
+							    </div>
+							</div>
+					    </div>
+					 </div>
+					 <div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-apps-linux">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-apps-linux" aria-expanded="false" aria-controls="flush-collapse-apps-linux">Linux</button>
+					    </h2>
+					    <div id="flush-collapse-apps-linux" class="accordion-collapse collapse" aria-labelledby="flush-heading-apps-linux" data-bs-parent="#accordionApps">
+					    	<div class="accordion-body">
+							    <h3>Hiddify</h3>
+							    Hiddify - рекомендуемое приложение для Linux
+							    
+							    <div class="list-group list-group-flush">
+									<a href="https://github.com/hiddify/hiddify-next/releases/latest/download/hiddify-linux-x64.zip" target="_blank" class="link list-group-item list-group-item-action">
+										<span>Скачать с GitHub</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" /></svg>
+									    </div>
+									</a>
+									<a href="hiddify://install-sub/?url={link}#Title" target="_blank" class="self-link link list-group-item list-group-item-action">
+										<span>Добавить подписку</span>
+									  	<div class="link-icon">
+									    	<svg class="icon" width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" /></svg>
+									    </div>
+									</a>
+								</div>
+								
+							    <div class="instructions">
+							    	<h6 class="instructions-title">Инструкция по подключению</h6>
+								    <p>1. Нажмите Скачать с GitHub, чтобы установить приложение</p>
+								    <p>2. Смените язык на Русский, в качестве региона укажите Россия (это необходимо, чтобы настройки роутинга применились автоматически) и нажмите Начать <img class="img-fluid rounded img-help" src="https://google.com/pic.png"></p>
+								    <p>3. Нажмите Добавить подписку</p>
+								    <p>4. Нажмите подключиться. Готово!<img class="img-fluid rounded img-help" src="https://google.com/pic.png"></p>
+							    </div>
+							</div>
+					    </div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="module">
+				<h3 class="module-title">Справка</h3>
+				<div class="accordion accordion-flush" id="accordionHelp">
+
+					<div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-help-1">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-help-1" aria-expanded="false" aria-controls="flush-collapse-help-1">Что такое роутинг и для чего нужен?</button>
+					    </h2>
+					    <div id="flush-collapse-help-1" class="accordion-collapse collapse" aria-labelledby="flush-heading-help-1" data-bs-parent="#accordionHelp">
+						    <div class="accordion-body">
+							    Роутинг - это гибкие правила перенаправления трафика. Роутинг позволяет подключаться к зарубежным сайтам и приложениям через VPN, а к российским - напрямую. Так удобнее, безопаснее и расходуется меньше VPN-трафика. Роутинг доступен не во всех приложениях.
+							</div>
+					    </div>
+					</div>
+
+					<div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-help-2">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-help-2" aria-expanded="false" aria-controls="flush-collapse-help-2">Что такое подписка?</button>
+					    </h2>
+					    <div id="flush-collapse-help-2" class="accordion-collapse collapse" aria-labelledby="flush-heading-help-2" data-bs-parent="#accordionHelp" style="">
+						    <div class="accordion-body">
+							    Подписка - это ссылка в специальном формате, по которой приложение загружает с сервера данные, необходимые для подключения. 
+							</div>
+					    </div>
+					</div>
+
+                    <div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-help-3">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-help-3" aria-expanded="false" aria-controls="flush-collapse-help-3">Как продлить подписку?</button>
+					    </h2>
+					    <div id="flush-collapse-help-3" class="accordion-collapse collapse" aria-labelledby="flush-heading-help-3" data-bs-parent="#accordionHelp" style="">
+						    <div class="accordion-body">
+							    Вам необходимо иметь баланс в нашем <a href="https://t.me/SecureWayVPN_Bot" target="_blank" class="link-dark" rel="noopener noreferrer">сервисе</a>, равный сумме подписки.
+							</div>
+					    </div>
+					</div>
+
+					<div class="accordion-item">
+					    <h2 class="accordion-header" id="flush-heading-help-4">
+					    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-help-3" aria-expanded="false" aria-controls="flush-collapse-help-3">Остались еще вопросы?</button>
+					    </h2>
+					    <div id="flush-collapse-help-4" class="accordion-collapse collapse" aria-labelledby="flush-heading-help-4" data-bs-parent="#accordionHelp">
+						    <div class="accordion-body">
+								Мы рады ответить на них, если Вы напишете его в <a href="https://t.me/SecureWayVPN" target="_blank" class="link-dark" rel="noopener noreferrer">поддержку</a>
+							</div>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+
+	<style>
+
+		html {
+		    margin: auto;
+		    max-width: 520px;
+		    min-width: 300px;
+		    padding: 0 25px 50px 25px;
+		}
+
+		.dot {
+			height: 10px;
+			width: 10px;
+			border-radius: 50%;
+			display: inline-block;
+			margin-right: 5px;	
+		}
+
+		.dot-red {
+			background-color: #bf1d11;
+		}
+
+		.dot-green {
+			background-color: green;
+		}
+
+		.dot-yellow {
+			background-color: #ffbe0a;
+		}
+
+		.app-icon {
+			margin-right: 8px;
+		}
+
+		.img-help {
+			margin-top: 10px;
+			margin-bottom: 10px;
+		}
+
+		.subscription li {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+		.accordion-body .list-group {
+			padding-bottom: 5px;
+		}
+
+		.accordion, 
+		.subscription .list-group {
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		    border-radius: 15px;
+		    overflow: hidden;
+		}
+
+		.accordion .list-group {
+			padding-top: 25px;
+		    --bs-list-group-item-padding-x: 5px;
+		}
+
+		.lh0 {
+			line-height: 0;
+		}
+
+		.instructions {
+			margin-top: 30px;
+		}
+
+		.instructions p {
+			margin-bottom: 5px;
+		}
+
+		.instructions-title {
+			margin: 10px 0;
+			font-size: 18px;
+		}
+
+		.link {
+			display: flex;
+		}
+
+		.link-icon {
+			width: 25px;
+			height: 25px;
+			margin-left: auto;
+		}
+
+		.module-title {
+			margin-top: 20px;
+			margin-bottom: 20px;
+		}
+
+		.accordion-button:not(.collapsed) {
+			background-color: #DCDCDC;
+			color: var(--bs-accordion-btn-color)
+		}
+
+		.accordion-button:focus {
+			box-shadow: none;
+			border-color: white;
+		}
+
+		.form-check-input:focus {
+			box-shadow: none;
+		}
+
+		#toast {
+			visibility: hidden;
+		    width: fit-content;
+		    margin: auto;
+		    color: #000;
+		    text-align: center;
+		    position: fixed;
+		    z-index: 1;
+		    left: 0;
+		    right: 0;
+		    top: 45px;
+		    font-size: 16px;
+			overflow: hidden;
+			white-space: nowrap;
+		}
+
+		#toast.show {
+		    visibility: visible;
+		    animation: fadein 1s, fadeout 1s 2s;
+		}
+
+		@keyframes fadein {
+		    from {
+		        top: 0;
+		        opacity: 0;
+		    }
+		    to {
+		        top: 45px;
+		        opacity: 1
+		    }
+		}
+
+		@keyframes fadeout {
+		    from {
+		        top: 45px;
+		        opacity: 1;
+		    }
+		    to {
+		        top: 0;
+		        opacity: 0;
+		    }
+		}
+
+		[data-bs-theme=light] .form-check-input:focus {
+			border-color: #dee2e6;
+			--bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+		}
+
+
+
+		/* Full dark theme */
+		[data-bs-theme=dark] .link-dark {
+			color: #dee2e6 !important; 
+			text-decoration: none;
+		}
+
+		[data-bs-theme=dark] #toast {
+			color: var(--bs-list-group-color)
+		}
+
+		[data-bs-theme=dark] svg {
+			filter: invert(100%) sepia(10%) saturate(7500%) hue-rotate(198deg) brightness(120%) contrast(108%);
+		}
+
+		[data-bs-theme=dark] *,
+		[data-bs-theme=dark] .subscription .list-group-item span, 
+		{
+		    background-color: #181818;
+		}
+
+		[data-bs-theme=dark] .accordion-button,
+		[data-bs-theme=dark] .subscription .list-group-item,
+		[data-bs-theme=dark] .subscription .list-group-item > *
+		{
+		    background-color: #282828;
+		}
+
+		[data-bs-theme=dark] .accordion-button:not(.collapsed) {
+			background-color: #383838;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+
+		function showNotification(notificationElementId) {
+		  	let notification = document.getElementById(notificationElementId)
+		    notification.className = "show";
+		    setTimeout(() => { 
+		    	notification.className = notification.className.replace("show", ""); 
+		    }, 2900);
+		}
+		
+		function copyToClipboard(text) {
+			navigator.clipboard.writeText(text);
+		}
+
+		const buttonSwitchTheme = document.getElementById('btnSwitchTheme');
+		buttonSwitchTheme.checked = currentThemeSetting === 'dark';
+		buttonSwitchTheme.addEventListener("click", () => {
+			  const newTheme = currentThemeSetting === "dark" ? "light" : "dark";
+			  setTheme(newTheme);			  
+		});
+
+		const links = document.getElementsByClassName('self-link');
+		Array.from(links).forEach(link => {
+			link.href = link.href.replace('{link}', window.location.href);
+		});
+
+        docunent.getElementById("used").innerHTML = `Трафик<span>${dataUsed} GB / ${dataLimit} GB</span>`
+
+	</script>
+</main></body></html>
