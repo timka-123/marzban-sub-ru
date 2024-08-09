@@ -40,6 +40,7 @@
         const dataLimit = "{% if not user.data_limit %}∞{% else %}{{ user.data_limit }}{% endif %}";
         const dataUsed = "{{ user.used_traffic }}";
         var tmpUsage = ((parseFloat(dataUsed) / parseFloat(dataLimit)) * 100).toFixed(2);
+        var isActive = "{% user.status.value == 'active' %}"
         if (tmpUsage > 100) tmpUsage = 100;
         const dataUsage = dataLimit == "∞" ? 100 : tmpUsage;
         const dataChartColor = dataUsage < 40 ? "bg-green-500" : dataUsage < 80 ? "bg-yellow-600" : "bg-red-500";
@@ -64,8 +65,16 @@
 				    	Имя пользователя<span>{{ user.username }}</span>
 				    </li>
 					<li class="list-group-item d-flex justify-content-between align-items-center">
-						Статус подписки<span><div class="dot dot-green"></div>Активна</span>	
+						Статус подписки<span class="activestatus"></span>	
 				    </li>
+                    <script>
+                        var a = document.getElementById("activestatus")
+                        if (isActive) {
+                            a.innerHTML = '<div class="dot dot-green"></div>Активна'
+                        } else {
+                            a.innerHTML = '<div class="dot dot-red"></div>Неактивна'
+                        }
+                    </script>
 				    <li class="list-group-item d-flex justify-content-between align-items-center">
                     Трафик<span id="used">0 GB / 100 GB</span>
                     <script>
